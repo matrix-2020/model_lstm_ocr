@@ -237,7 +237,7 @@ def train():
                 do_infer()
              
 
-            if steps > 1000 and train_ctc_loss < 1 and accuracy > 0.95:
+            if accuracy > 0.95:
                 saver.save(session, "model_ocr/model_lstm_ocr", global_step=steps)
 
                 break
