@@ -145,14 +145,8 @@ def get_train_model():
     seq_len = tf.placeholder(tf.int32, [None])
     
     # define one layer LSTM ---cell
-    #cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple=True)
-
-    # define multi-layer LSTM
-    stack_lstm = []
-    for i in range(2):
-        stack_lstm.append(tf.contrib.rnn.BasicLSTMCell(num_hidden,state_is_tuple=True))
-    stack = tf.contrib.rnn.MultiRNNCell(stack_lstm, state_is_tuple=True)
-    outputs, _ = tf.nn.dynamic_rnn(stack, inputs, seq_len, dtype=tf.float32)
+    cell = tf.contrib.rnn.LSTMCell(num_hidden, state_is_tuple=True)
+    outputs, _ = tf.nn.dynamic_rnn(cell, inputs, seq_len, dtype=tf.float32)
     
     shape = tf.shape(inputs)
     batch_s, max_timesteps = shape[0], shape[1]
